@@ -1,1 +1,441 @@
-{"lapset":[{"id":"l1","nimi":"Selma","luokka":3,"aiheet":[]},{"id":"l2","nimi":"Emilia","luokka":5,"aiheet":[]},{"id":"l3","nimi":"Julia","luokka":6,"aiheet":[]}]}
+{
+ "lapset": [
+  {
+   "id": "l1",
+   "nimi": "Selma",
+   "luokka": 3,
+   "aiheet": []
+  },
+  {
+   "id": "l2",
+   "nimi": "Emilia",
+   "luokka": 5,
+   "aiheet": []
+  },
+  {
+   "id": "l3",
+   "nimi": "Julia",
+   "luokka": 6,
+   "aiheet": [
+    {
+     "id": "alnd3s",
+     "nimi": "Verbit, kappale 2 (s. 14)",
+     "tehtavat": [
+      {
+       "k": "Kirjoita englanniksi: syödä, söi",
+       "v": "eat, ate"
+      },
+      {
+       "k": "Kirjoita englanniksi: juoda, joi",
+       "v": "drink, drank"
+      },
+      {
+       "k": "Kirjoita englanniksi: ajaa, ajoi (autolla)",
+       "v": "drive, drove"
+      },
+      {
+       "k": "Kirjoita englanniksi: ajaa, ajoi (pyörällä tai hevosella)",
+       "v": "ride, rode"
+      },
+      {
+       "k": "Kirjoita englanniksi: antaa, antoi",
+       "v": "give, gave"
+      },
+      {
+       "k": "Kirjoita englanniksi: valmistaa, valmisti",
+       "v": "make, made"
+      },
+      {
+       "k": "Kirjoita englanniksi: lukea, luki",
+       "v": "read, read"
+      },
+      {
+       "k": "Kirjoita englanniksi: kertoa, kertoi",
+       "v": "tell, told"
+      },
+      {
+       "k": "Kirjoita englanniksi: kuulla, kuuli",
+       "v": "hear, heard"
+      },
+      {
+       "k": "Kirjoita englanniksi: nähdä, näki",
+       "v": "see, saw"
+      },
+      {
+       "k": "Kirjoita englanniksi: laulaa, lauloi",
+       "v": "sing, sang"
+      },
+      {
+       "k": "Kirjoita englanniksi: istua, istui",
+       "v": "sit, sat"
+      },
+      {
+       "k": "Kirjoita englanniksi: seisoa, seisoi",
+       "v": "stand, stood"
+      },
+      {
+       "k": "Kirjoita englanniksi: ostaa, osti",
+       "v": "buy, bought"
+      },
+      {
+       "k": "Kirjoita englanniksi: ottaa kiinni, otti kiinni",
+       "v": "catch, caught"
+      },
+      {
+       "k": "Kirjoita englanniksi: ajatella, ajatteli",
+       "v": "think, thought"
+      },
+      {
+       "k": "Mikä on verbin eat mennyt aika?",
+       "vaihtoehdot": [
+        "ate",
+        "eated",
+        "eaten",
+        "eat"
+       ],
+       "oikea": 0,
+       "selitys": "eat, ate = syödä, söi"
+      },
+      {
+       "k": "Mikä on verbin see mennyt aika?",
+       "vaihtoehdot": [
+        "seed",
+        "seen",
+        "saw",
+        "sawed"
+       ],
+       "oikea": 2,
+       "selitys": "see, saw = nähdä, näki"
+      },
+      {
+       "k": "Mikä on verbin buy mennyt aika?",
+       "vaihtoehdot": [
+        "buyed",
+        "boughted",
+        "buyt",
+        "bought"
+       ],
+       "oikea": 3,
+       "selitys": "buy, bought = ostaa, osti"
+      },
+      {
+       "k": "Mikä on verbin think mennyt aika?",
+       "vaihtoehdot": [
+        "thought",
+        "thinked",
+        "thunk",
+        "thanked"
+       ],
+       "oikea": 0,
+       "selitys": "think, thought = ajatella, ajatteli"
+      },
+      {
+       "k": "Mikä on verbin catch mennyt aika?",
+       "vaihtoehdot": [
+        "catched",
+        "caught",
+        "cought",
+        "catch"
+       ],
+       "oikea": 1,
+       "selitys": "catch, caught = ottaa kiinni, otti kiinni"
+      },
+      {
+       "k": "Mikä on verbin sing mennyt aika?",
+       "vaihtoehdot": [
+        "singed",
+        "sung",
+        "sang",
+        "song"
+       ],
+       "oikea": 2,
+       "selitys": "sing, sang = laulaa, lauloi"
+      },
+      {
+       "k": "Mikä on verbin tell mennyt aika?",
+       "vaihtoehdot": [
+        "telled",
+        "told",
+        "tald",
+        "tell"
+       ],
+       "oikea": 1,
+       "selitys": "tell, told = kertoa, kertoi"
+      },
+      {
+       "k": "Mikä on verbin sit mennyt aika?",
+       "vaihtoehdot": [
+        "sat",
+        "sitted",
+        "set",
+        "sit"
+       ],
+       "oikea": 0,
+       "selitys": "sit, sat = istua, istui"
+      }
+     ]
+    },
+    {
+     "id": "a1psn2",
+     "nimi": "Verbit, kappale 3 (s. 20)",
+     "tehtavat": [
+      {
+       "k": "Kirjoita englanniksi: kaatua, kaatui",
+       "v": "fall, fell"
+      },
+      {
+       "k": "Kirjoita englanniksi: löytää, löysi",
+       "v": "find, found"
+      },
+      {
+       "k": "Kirjoita englanniksi: lentää, lensi",
+       "v": "fly, flew"
+      },
+      {
+       "k": "Kirjoita englanniksi: tulla, tuli",
+       "v": "come, came"
+      },
+      {
+       "k": "Kirjoita englanniksi: mennä, meni",
+       "v": "go, went"
+      },
+      {
+       "k": "Kirjoita englanniksi: tietää, tiesi",
+       "v": "know, knew"
+      },
+      {
+       "k": "Kirjoita englanniksi: heittää, heitti",
+       "v": "throw, threw"
+      },
+      {
+       "k": "Kirjoita englanniksi: tehdä, teki",
+       "v": "do, did"
+      },
+      {
+       "k": "Kirjoita englanniksi: puhua, puhui",
+       "v": "speak, spoke"
+      },
+      {
+       "k": "Kirjoita englanniksi: kirjoittaa, kirjoitti",
+       "v": "write, wrote"
+      },
+      {
+       "k": "Kirjoita englanniksi: pitää, piti",
+       "v": "keep, kept"
+      },
+      {
+       "k": "Kirjoita englanniksi: nukkua, nukkui",
+       "v": "sleep, slept"
+      },
+      {
+       "k": "Kirjoita englanniksi: uida, ui",
+       "v": "swim, swam"
+      },
+      {
+       "k": "Kirjoita englanniksi: juosta, juoksi",
+       "v": "run, ran"
+      },
+      {
+       "k": "Kirjoita englanniksi: ottaa, otti",
+       "v": "take, took"
+      },
+      {
+       "k": "Kirjoita englanniksi: tavata, tapasi",
+       "v": "meet, met"
+      },
+      {
+       "k": "Mikä on verbin go mennyt aika?",
+       "vaihtoehdot": [
+        "goed",
+        "went",
+        "gone",
+        "wented"
+       ],
+       "oikea": 1,
+       "selitys": "go, went = mennä, meni"
+      },
+      {
+       "k": "Mikä on verbin fly mennyt aika?",
+       "vaihtoehdot": [
+        "flied",
+        "flew",
+        "flow",
+        "flyed"
+       ],
+       "oikea": 1,
+       "selitys": "fly, flew = lentää, lensi"
+      },
+      {
+       "k": "Mikä on verbin write mennyt aika?",
+       "vaihtoehdot": [
+        "writed",
+        "written",
+        "wrote",
+        "writ"
+       ],
+       "oikea": 2,
+       "selitys": "write, wrote = kirjoittaa, kirjoitti"
+      },
+      {
+       "k": "Mikä on verbin sleep mennyt aika?",
+       "vaihtoehdot": [
+        "sleeped",
+        "slept",
+        "slaped",
+        "sleep"
+       ],
+       "oikea": 1,
+       "selitys": "sleep, slept = nukkua, nukkui"
+      },
+      {
+       "k": "Mikä on verbin know mennyt aika?",
+       "vaihtoehdot": [
+        "knowed",
+        "known",
+        "knew",
+        "new"
+       ],
+       "oikea": 2,
+       "selitys": "know, knew = tietää, tiesi"
+      },
+      {
+       "k": "Mikä on verbin take mennyt aika?",
+       "vaihtoehdot": [
+        "taked",
+        "took",
+        "taken",
+        "tooked"
+       ],
+       "oikea": 1,
+       "selitys": "take, took = ottaa, otti"
+      },
+      {
+       "k": "Mikä on verbin run mennyt aika?",
+       "vaihtoehdot": [
+        "runned",
+        "run",
+        "ran",
+        "rand"
+       ],
+       "oikea": 2,
+       "selitys": "run, ran = juosta, juoksi"
+      },
+      {
+       "k": "Mikä on verbin come mennyt aika?",
+       "vaihtoehdot": [
+        "comed",
+        "come",
+        "cam",
+        "came"
+       ],
+       "oikea": 3,
+       "selitys": "come, came = tulla, tuli"
+      }
+     ]
+    },
+    {
+     "id": "fby5as",
+     "nimi": "Sanat, kappale 2 (s. 18)",
+     "tehtavat": [
+      {
+       "k": "Kirjoita englanniksi: pieni",
+       "v": "little"
+      },
+      {
+       "k": "Kirjoita englanniksi: vanha",
+       "v": "old"
+      },
+      {
+       "k": "Kirjoita englanniksi: iso",
+       "v": "big"
+      },
+      {
+       "k": "Kirjoita englanniksi: iloinen",
+       "v": "happy"
+      },
+      {
+       "k": "Kirjoita englanniksi: pelottava",
+       "v": "scary"
+      },
+      {
+       "k": "Kirjoita englanniksi: kiireinen",
+       "v": "busy"
+      },
+      {
+       "k": "Kirjoita englanniksi: pitkä",
+       "v": "tall"
+      },
+      {
+       "k": "Kirjoita englanniksi: laiska",
+       "v": "lazy"
+      },
+      {
+       "k": "Kirjoita englanniksi: surullinen",
+       "v": "sad"
+      },
+      {
+       "k": "Kirjoita englanniksi: fiksu",
+       "v": "clever"
+      },
+      {
+       "k": "Kirjoita englanniksi: vahva",
+       "v": "strong"
+      },
+      {
+       "k": "Kirjoita englanniksi: rikas",
+       "v": "rich"
+      },
+      {
+       "k": "Kirjoita englanniksi: tyttö",
+       "v": "girl"
+      },
+      {
+       "k": "Kirjoita englanniksi: mies",
+       "v": "man"
+      },
+      {
+       "k": "Kirjoita englanniksi: poika",
+       "v": "boy"
+      },
+      {
+       "k": "Kirjoita englanniksi: nainen",
+       "v": "woman"
+      },
+      {
+       "k": "Kirjoita englanniksi: hämähäkki",
+       "v": "spider"
+      },
+      {
+       "k": "Kirjoita englanniksi: opettaja",
+       "v": "teacher"
+      },
+      {
+       "k": "Kirjoita englanniksi: isoisä",
+       "v": "grandfather"
+      },
+      {
+       "k": "Kirjoita englanniksi: apina",
+       "v": "monkey"
+      },
+      {
+       "k": "Kirjoita englanniksi: papukaija",
+       "v": "parrot"
+      },
+      {
+       "k": "Kirjoita englanniksi: tiikeri",
+       "v": "tiger"
+      },
+      {
+       "k": "Kirjoita englanniksi: kissa",
+       "v": "cat"
+      },
+      {
+       "k": "Kirjoita englanniksi: robotti",
+       "v": "robot"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
