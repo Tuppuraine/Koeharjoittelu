@@ -2,116 +2,128 @@
 <html lang="fi"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Koeharjoittelu</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap">
 <style>
-:root{--bg:#f2f6ff;--card:#fff;--ink:#16213e;--mut:#5c6784;--acc:#3b5bdb;--acc2:#e3eafd;--ok:#2b9348;--okb:#dff5e5;--bad:#d9480f;--badb:#ffe8dc;--sun:#ffd43b;--line:#d5ddf2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10162b;--card:#1a2340;--ink:#eaf0ff;--mut:#9aa8cf;--acc:#8ea6ff;--acc2:#26325c;--ok:#5fd07f;--okb:#183a27;--bad:#ff9364;--badb:#452a1d;--line:#2d3a66}}
-:root[data-theme="dark"]{--bg:#10162b;--card:#1a2340;--ink:#eaf0ff;--mut:#9aa8cf;--acc:#8ea6ff;--acc2:#26325c;--ok:#5fd07f;--okb:#183a27;--bad:#ff9364;--badb:#452a1d;--line:#2d3a66}
+:root{--bg:#f2f6ff;--card:#fff;--ink:#16213e;--mut:#5c6784;--acc:#3b5bdb;--ok:#2b9348;--okb:#dff5e5;--bad:#d9480f;--badb:#ffe8dc;--line:#d5ddf2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10162b;--card:#1a2340;--ink:#eaf0ff;--mut:#9aa8cf;--acc:#8ea6ff;--ok:#5fd07f;--okb:#183a27;--bad:#ff9364;--badb:#452a1d;--line:#2d3a66}}
+:root[data-theme="dark"]{--bg:#10162b;--card:#1a2340;--ink:#eaf0ff;--mut:#9aa8cf;--acc:#8ea6ff;--ok:#5fd07f;--okb:#183a27;--bad:#ff9364;--badb:#452a1d;--line:#2d3a66}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:600 17px/1.5 Nunito,ui-rounded,system-ui,sans-serif}
+body{margin:0;background:var(--bg);color:var(--ink);font:600 18px/1.5 ui-rounded,system-ui,sans-serif}
 #app{max-width:640px;margin:0 auto;padding:16px}
-h1{font-size:26px;font-weight:800;margin:4px 0 12px}
-h2{font-size:19px;font-weight:800;margin:0 0 8px}
+h1{font-size:26px;margin:4px 0 12px}h2{font-size:19px;margin:0 0 8px}
 button,select,input,textarea{font:inherit;color:inherit}
-button{cursor:pointer;border:2px solid var(--line);background:var(--card);border-radius:14px;padding:10px 14px;min-height:44px}
+button{cursor:pointer;border:2px solid var(--line);background:var(--card);border-radius:14px;padding:10px 14px;min-height:46px}
 button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
-button.on{background:var(--acc);border-color:var(--acc);color:#fff}
 button.pri{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:800}
-button.big{width:100%;text-align:left;margin:8px 0}
-.row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:0 0 16px}
-nav button{padding:8px 4px;font-size:15px}
+button.big{width:100%;text-align:left;margin:8px 0;font-size:20px}
 .card{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px}
-.q{font-size:22px;font-weight:800;line-height:1.35;margin:0 0 10px}
-.ok{background:var(--okb);border-color:var(--ok)}
-.no{background:var(--badb);border-color:var(--bad)}
+.q{font-size:22px;font-weight:800;margin:0 0 10px}
+.ok{background:var(--okb);border-color:var(--ok)}.no{background:var(--badb);border-color:var(--bad)}
 .mut{color:var(--mut);font-size:15px}
 select,input,textarea{width:100%;background:var(--card);border:2px solid var(--line);border-radius:12px;padding:10px;margin-bottom:10px}
-textarea{min-height:160px;font:14px/1.4 ui-monospace,monospace}
-.bar{height:12px;background:var(--acc2);border-radius:6px;overflow:hidden;margin:6px 0}
-.bar i{display:block;height:100%;background:var(--ok)}
-.hl{background:var(--sun);color:#16213e;border-radius:8px;padding:2px 8px;font-weight:800}
-</style></head><body><div id="app"></div>
+textarea{min-height:140px;font:13px/1.4 ui-monospace,monospace}
+.bar{height:12px;background:var(--line);border-radius:6px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:var(--ok)}
+.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1}
+</style></head><body><div id="app">Ladataan…</div>
 <script>
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const uid=()=>Math.random().toString(36).slice(2,9);
-let S={kids:[],cur:null};
-try{const r=localStorage.getItem('koe1');if(r)S=JSON.parse(r)}catch(e){}
-const save=()=>{try{localStorage.setItem('koe1',JSON.stringify(S))}catch(e){}};
-let U={tab:'h',topic:'all',item:null,last:null,shown:false,picked:null,msg:'',del:null};
-const kid=()=>S.kids.find(k=>k.id===S.cur)||null;
+const uid=()=>Math.random().toString(36).slice(2,8);
+const ld=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v??d}catch(e){return d}};
+const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const norm=s=>String(s).toLowerCase().replace(/[^\p{L}\p{N}]/gu,'');
+const clone=o=>JSON.parse(JSON.stringify(o));
+let PUB={lapset:[]},DR=null,PROG=ld('prog2',{}),K={kid:null,topic:null,item:null,last:null,res:null},A={sel:null,msg:'',del:null},ERR='';
+const admin=()=>location.hash==='#yllapito';
+const kids=()=>admin()?DR.lapset:PUB.lapset;
+const prog=id=>PROG[id]||(PROG[id]={});
+const find=(id)=>kids().find(x=>x.id===id);
 
-function pick(k){
-  const pool=k.topics.filter(t=>U.topic==='all'||t.id===U.topic).flatMap(t=>t.items);
-  const p=pool.length>1?pool.filter(i=>i!==U.last):pool;
-  const w=p.map(i=>4-(i.box||0));let r=Math.random()*w.reduce((a,b)=>a+b,0);
-  for(let n=0;n<p.length;n++){r-=w[n];if(r<=0)return p[n]}
-  return p[0]||null;
+/* ---------- lapsen näkymä ---------- */
+function pick(kid,t){
+  const p=t.tehtavat.length>1?t.tehtavat.filter(i=>i!==K.last):t.tehtavat,pr=prog(kid.id);
+  const w=p.map(i=>4-(pr[i.k]||0));let r=Math.random()*w.reduce((a,b)=>a+b,0);
+  for(let n=0;n<p.length;n++){r-=w[n];if(r<=0)return p[n]}return p[0]||null;
 }
-function vKids(){
-  return '<div class="card"><h2>Lisää lapsi</h2><input id="nm" placeholder="Nimi" maxlength="30"><select id="gr">'+[1,2,3,4,5,6].map(n=>`<option value="${n}" ${n===3?'selected':''}>${n}. luokka</option>`).join('')+'</select><button class="pri" data-a="addkid">Lisää lapsi</button></div>'
-  +S.kids.map(x=>`<div class="card"><h2>${esc(x.name)}</h2><div class="mut">${x.grade}. luokka, ${x.topics.length} aihetta</div><div class="row" style="margin:10px 0 0"><button data-a="kid" data-id="${x.id}">Valitse</button><button data-a="delkid" data-id="${x.id}">${U.del===x.id?'Varmista poisto':'Poista'}</button></div></div>`).join('');
+function vHome(){
+  if(ERR)return `<div class="card no">${esc(ERR)}</div>`;
+  return '<h1>Kuka harjoittelee?</h1>'+PUB.lapset.map(k=>`<button class="big" data-a="kid" data-id="${k.id}">${esc(k.nimi)}</button>`).join('');
 }
-function vImport(k){
-  return `<div class="card"><h2>Tuo tehtäviä lapselle ${esc(k.name)}</h2><p class="mut">Kuvaa kirjan sivut Claudelle chatissa ja pyydä tehtävät JSON-muodossa. Liitä vastaus tähän.</p><textarea id="js" placeholder='{"aihe":"...","tehtavat":[...]}'></textarea><button class="pri" data-a="imp">Tuo tehtävät</button><p>${esc(U.msg)}</p></div>`;
+function vTopics(k){
+  const pr=prog(k.id);
+  return `<button data-a="home">Takaisin</button><h1>${esc(k.nimi)}, valitse aihe</h1>`+(k.aiheet.length?k.aiheet.map(t=>{
+    const n=t.tehtavat.length,m=t.tehtavat.filter(i=>(pr[i.k]||0)>=2).length,p=n?Math.round(m/n*100):0;
+    return `<div class="card"><h2>${esc(t.nimi)}</h2><div class="mut">Osattu ${m} / ${n}</div><div class="bar"><i style="width:${p}%"></i></div><button class="pri" data-a="topic" data-id="${t.id}">Aloita</button></div>`}).join(''):'<div class="card">Ei vielä aiheita.</div>');
 }
-function vStats(k){
-  if(!k.topics.length)return '<div class="card">Ei vielä aiheita. Tuo tehtäviä ensin.</div>';
-  return k.topics.map(t=>{const n=t.items.length,m=t.items.filter(i=>(i.box||0)>=2).length,p=n?Math.round(m/n*100):0;
-    return `<div class="card"><h2>${esc(t.name)}</h2><div class="mut">${n} tehtävää, hallussa ${m} (${p} %)</div><div class="bar"><i style="width:${p}%"></i></div><button data-a="deltopic" data-id="${t.id}">${U.del===t.id?'Varmista poisto':'Poista aihe'}</button></div>`}).join('');
+function vQuiz(k,t){
+  if(!K.item)K.item=pick(k,t);
+  const it=K.item,res=K.res;
+  let b=`<button data-a="back">Aiheisiin</button><h1>${esc(t.nimi)}</h1><div class="card"><p class="q">${esc(it.k)}</p>`;
+  if(it.vaihtoehdot){
+    b+=it.vaihtoehdot.map((o,i)=>{let c='';if(res){if(i===it.oikea)c='ok';else if(i===res.picked)c='no'}
+      return `<button class="big ${c}" data-a="opt" data-id="${i}" ${res?'disabled':''}>${esc(o)}</button>`}).join('');
+    if(res&&it.selitys)b+=`<p class="mut">${esc(it.selitys)}</p>`;
+  }else if(!res){
+    b+='<input id="ans" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Kirjoita vastaus"><button class="pri" data-a="send">Tarkista</button>';
+  }else{
+    b+=res.ok?'<p class="card ok">Oikein!</p>':`<p class="card no">Ei oikein. Kirjoitit: ${esc(res.typed)}<br>Oikea vastaus: <b>${esc(it.v.split('|')[0])}</b></p>`;
+  }
+  if(res)b+='<button class="pri" data-a="next" style="margin-top:8px">Seuraava</button>';
+  return b+'</div>';
 }
-function vPractice(k){
-  if(!k.topics.length)return '<div class="card">Ei vielä tehtäviä. Tuo niitä välilehdellä Tuo tehtäviä.</div>';
-  const sel=`<select id="tp"><option value="all">Kaikki aiheet</option>${k.topics.map(t=>`<option value="${t.id}" ${U.topic===t.id?'selected':''}>${esc(t.name)}</option>`).join('')}</select>`;
-  if(!U.item)U.item=pick(k);
-  const it=U.item;if(!it)return sel+'<div class="card">Tässä aiheessa ei ole tehtäviä.</div>';
-  let b=`<div class="card"><p class="q">${esc(it.k)}</p>`;
-  if(it.opts){
-    b+=it.opts.map((o,i)=>{let c='';if(U.picked!==null){if(i===it.c)c='ok';else if(i===U.picked)c='no'}
-      return `<button class="big ${c}" data-a="opt" data-id="${i}" ${U.picked!==null?'disabled':''}>${esc(o)}</button>`}).join('');
-    if(U.picked!==null)b+=(it.e?`<p class="mut">${esc(it.e)}</p>`:'')+'<button class="pri" data-a="next">Seuraava</button>';
-  }else if(!U.shown){b+='<button class="pri" data-a="show">Näytä vastaus</button>'}
-  else{b+=`<p><span class="hl">${esc(it.v)}</span></p><div class="row"><button class="ok" data-a="grade" data-id="1">Osasin</button><button class="no" data-a="grade" data-id="0">En osannut</button></div>`}
-  return sel+b+'</div>';
+function setBox(ok){const pr=prog(K.kid),it=K.item;pr[it.k]=ok?Math.min(3,(pr[it.k]||0)+1):0;sv('prog2',PROG)}
+
+/* ---------- ylläpito ---------- */
+function vAdmin(){
+  const same=JSON.stringify(PUB)===JSON.stringify(DR);
+  return `<h1>Ylläpito</h1><a href="#" data-a="leave">Lasten näkymään</a><p class="mut" style="margin-top:12px">${same?'Luonnos vastaa julkaistua versiota.':'Luonnoksessa on julkaisemattomia muutoksia. Kopioi ne alta GitHubiin.'}</p>`
+  +DR.lapset.map(k=>`<div class="card"><input data-f="nimi" data-id="${k.id}" value="${esc(k.nimi)}" aria-label="Nimi"><select data-f="luokka" data-id="${k.id}">${[1,2,3,4,5,6].map(n=>`<option value="${n}" ${n===+k.luokka?'selected':''}>${n}. luokka</option>`).join('')}</select>`
+    +k.aiheet.map(t=>`<div class="row" style="align-items:center;margin-bottom:6px"><span>${esc(t.nimi)} <span class="mut">(${t.tehtavat.length})</span></span><button data-a="deltopic" data-id="${k.id}" data-t="${t.id}" style="flex:0 0 auto">${A.del===t.id?'Varmista':'Poista'}</button></div>`).join('')
+    +`<button data-a="delkid" data-id="${k.id}">${A.del===k.id?'Varmista lapsen poisto':'Poista lapsi'}</button></div>`).join('')
+  +`<button data-a="addkid">Lisää lapsi</button><div class="card" style="margin-top:12px"><h2>Tuo aihe</h2><select id="tk">${DR.lapset.map(k=>`<option value="${k.id}" ${A.sel===k.id?'selected':''}>${esc(k.nimi)}</option>`).join('')}</select><textarea id="js" placeholder='{"aihe":"...","tehtavat":[...]}'></textarea><button class="pri" data-a="imp">Lisää aihe</button><p>${esc(A.msg)}</p></div>`
+  +`<div class="card"><h2>Julkaise</h2><p class="mut">Kopioi teksti, avaa GitHubissa tiedosto data.json, valitse muokkaus, korvaa koko sisältö ja tallenna. Sivu päivittyy hetken päästä.</p><textarea id="out" readonly>${esc(JSON.stringify(DR,null,1))}</textarea><div class="row"><button class="pri" data-a="copy">Kopioi</button><button data-a="reset">Palauta julkaistu</button></div></div>`;
 }
-function render(){
-  const k=kid();
-  let h='<h1>Koeharjoittelu</h1><div class="row">'+S.kids.map(x=>`<button class="${x.id===S.cur?'on':''}" data-a="kid" data-id="${x.id}">${esc(x.name)}, ${x.grade}. lk</button>`).join('')+'</div>';
-  h+='<nav>'+[['h','Harjoittele'],['t','Tuo'],['s','Tilanne'],['l','Lapset']].map(([t,n])=>`<button class="${U.tab===t?'on':''}" data-a="tab" data-id="${t}">${n}</button>`).join('')+'</nav>';
-  h+=U.tab==='l'?vKids():!k?'<div class="card">Lisää ensin lapsi Lapset-välilehdellä.</div>':U.tab==='h'?vPractice(k):U.tab==='t'?vImport(k):vStats(k);
-  $('#app').innerHTML=h;
-}
-function score(ok){const it=U.item;it.box=ok?Math.min(3,(it.box||0)+1):0;save()}
-function next(){U.last=U.item;U.item=null;U.shown=false;U.picked=null;render()}
-function doImport(k){
+function doImport(){
   try{
-    const t=$('#js').value.trim().replace(/^```(?:json)?/,'').replace(/```$/,'').trim();
-    const d=JSON.parse(t),list=Array.isArray(d.tehtavat)?d.tehtavat:[];
-    const items=list.filter(x=>x&&x.k&&(x.v||Array.isArray(x.vaihtoehdot))).map(x=>Array.isArray(x.vaihtoehdot)?{k:x.k,opts:x.vaihtoehdot,c:+x.oikea||0,e:x.selitys||'',box:0}:{k:x.k,v:x.v,box:0});
+    const t=$('#js').value.trim().replace(/^```(?:json)?/,'').replace(/```$/,'').trim(),d=JSON.parse(t);
+    const items=(d.tehtavat||[]).filter(x=>x&&x.k&&(x.v||Array.isArray(x.vaihtoehdot))).map(x=>Array.isArray(x.vaihtoehdot)?{k:x.k,vaihtoehdot:x.vaihtoehdot,oikea:+x.oikea||0,selitys:x.selitys||''}:{k:x.k,v:x.v});
     if(!items.length)throw 0;
-    let tp=k.topics.find(t=>t.name===d.aihe);
-    if(!tp){tp={id:uid(),name:d.aihe||'Nimetön aihe',items:[]};k.topics.push(tp)}
-    tp.items.push(...items);save();U.msg='Tuotu '+items.length+' tehtävää aiheeseen '+tp.name+'.';
-  }catch(e){U.msg='En ymmärtänyt tekstiä. Liitä koko JSON sellaisenaan.'}
-  render();
+    const kid=DR.lapset.find(x=>x.id===$('#tk').value);A.sel=kid.id;
+    let tp=kid.aiheet.find(x=>x.nimi===d.aihe);
+    if(!tp){tp={id:uid(),nimi:d.aihe||'Nimetön aihe',tehtavat:[]};kid.aiheet.push(tp)}
+    const have=new Set(tp.tehtavat.map(x=>x.k));const add=items.filter(x=>!have.has(x.k));
+    tp.tehtavat.push(...add);sv('draft',DR);A.msg=`Lisätty ${add.length} tehtävää (${items.length-add.length} oli jo).`;
+  }catch(e){A.msg='En ymmärtänyt tekstiä. Liitä koko JSON sellaisenaan.'}
+}
+
+/* ---------- pääohjaus ---------- */
+function render(){
+  let h;
+  if(admin()&&DR)h=vAdmin();
+  else{const k=find(K.kid),t=k&&k.aiheet.find(x=>x.id===K.topic);h=!k?vHome():!t?vTopics(k):vQuiz(k,t)}
+  $('#app').innerHTML=h;const a=$('#ans');if(a)a.focus();
 }
 document.addEventListener('click',e=>{
-  const b=e.target.closest('[data-a]');if(!b)return;
-  const a=b.dataset.a,id=b.dataset.id,k=kid();
-  if(a==='tab'){U.tab=id;U.del=null;U.msg=''}
-  else if(a==='kid'){S.cur=id;U.item=null;U.topic='all';U.tab='h';save()}
-  else if(a==='addkid'){const n=$('#nm').value.trim();if(!n)return;const x={id:uid(),name:n,grade:+$('#gr').value,topics:[]};S.kids.push(x);S.cur=x.id;save();U.tab='t'}
-  else if(a==='delkid'){if(U.del===id){S.kids=S.kids.filter(x=>x.id!==id);if(S.cur===id)S.cur=S.kids[0]?.id||null;U.del=null;U.item=null;save()}else U.del=id}
-  else if(a==='imp'){return doImport(k)}
-  else if(a==='deltopic'){if(U.del===id){k.topics=k.topics.filter(t=>t.id!==id);U.del=null;U.item=null;U.topic='all';save()}else U.del=id}
-  else if(a==='show'){U.shown=true}
-  else if(a==='grade'){score(id==='1');return next()}
-  else if(a==='opt'){U.picked=+id;score(+id===U.item.c)}
-  else if(a==='next'){return next()}
+  const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,id=b.dataset.id;
+  if(a==='kid'){K={kid:id,topic:null,item:null,last:null,res:null}}
+  else if(a==='home'){K={kid:null,topic:null,item:null,last:null,res:null}}
+  else if(a==='back'){K.topic=null;K.item=null;K.res=null}
+  else if(a==='topic'){K.topic=id;K.item=null;K.res=null}
+  else if(a==='opt'){K.res={ok:+id===K.item.oikea,picked:+id};setBox(K.res.ok)}
+  else if(a==='send'){const v=$('#ans').value;if(!v.trim())return;const ok=K.item.v.split('|').some(x=>norm(x)===norm(v));K.res={ok,typed:v.trim()};setBox(ok)}
+  else if(a==='next'){const k=find(K.kid);K.last=K.item;K.item=null;K.res=null}
+  else if(a==='leave'){location.hash='';return}
+  else if(a==='imp'){doImport()}
+  else if(a==='addkid'){DR.lapset.push({id:uid(),nimi:'Uusi lapsi',luokka:3,aiheet:[]});sv('draft',DR)}
+  else if(a==='delkid'){if(A.del===id){DR.lapset=DR.lapset.filter(x=>x.id!==id);A.del=null;sv('draft',DR)}else A.del=id}
+  else if(a==='deltopic'){const t=b.dataset.t;if(A.del===t){const k=DR.lapset.find(x=>x.id===id);k.aiheet=k.aiheet.filter(x=>x.id!==t);A.del=null;sv('draft',DR)}else A.del=t}
+  else if(a==='reset'){DR=clone(PUB);try{localStorage.removeItem('draft')}catch(e){}}
+  else if(a==='copy'){const o=$('#out');o.select();try{navigator.clipboard.writeText(o.value)}catch(e){document.execCommand('copy')}A.msg='Kopioitu.';return}
   render();
 });
-document.addEventListener('change',e=>{if(e.target.id==='tp'){U.topic=e.target.value;U.item=null;U.shown=false;U.picked=null;render()}});
-render();
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='ans')document.querySelector('[data-a="send"]').click()});
+document.addEventListener('change',e=>{const f=e.target.dataset.f;if(!f||!DR)return;const k=DR.lapset.find(x=>x.id===e.target.dataset.id);if(k){k[f]=e.target.value;sv('draft',DR)}});
+window.addEventListener('hashchange',render);
+fetch('data.json?'+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(d=>{PUB=d;DR=ld('draft',null)||clone(d);render()})
+ .catch(()=>{ERR='Tehtävien lataus epäonnistui. Avaa sivu verkko-osoitteesta.';DR=ld('draft',{lapset:[]});render()});
 </script></body></html>
