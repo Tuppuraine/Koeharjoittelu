@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Koeharjoittelu</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap">
+<style>
+:root{--bg:#f2f6ff;--card:#fff;--ink:#16213e;--mut:#5c6784;--acc:#3b5bdb;--acc2:#e3eafd;--ok:#2b9348;--okb:#dff5e5;--bad:#d9480f;--badb:#ffe8dc;--sun:#ffd43b;--line:#d5ddf2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10162b;--card:#1a2340;--ink:#eaf0ff;--mut:#9aa8cf;--acc:#8ea6ff;--acc2:#26325c;--ok:#5fd07f;--okb:#183a27;--bad:#ff9364;--badb:#452a1d;--line:#2d3a66}}
+:root[data-theme="dark"]{--bg:#10162b;--card:#1a2340;--ink:#eaf0ff;--mut:#9aa8cf;--acc:#8ea6ff;--acc2:#26325c;--ok:#5fd07f;--okb:#183a27;--bad:#ff9364;--badb:#452a1d;--line:#2d3a66}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:600 17px/1.5 Nunito,ui-rounded,system-ui,sans-serif}
+#app{max-width:640px;margin:0 auto;padding:16px}
+h1{font-size:26px;font-weight:800;margin:4px 0 12px}
+h2{font-size:19px;font-weight:800;margin:0 0 8px}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:2px solid var(--line);background:var(--card);border-radius:14px;padding:10px 14px;min-height:44px}
+button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+button.pri{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:800}
+button.big{width:100%;text-align:left;margin:8px 0}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+nav{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:0 0 16px}
+nav button{padding:8px 4px;font-size:15px}
+.card{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px}
+.q{font-size:22px;font-weight:800;line-height:1.35;margin:0 0 10px}
+.ok{background:var(--okb);border-color:var(--ok)}
+.no{background:var(--badb);border-color:var(--bad)}
+.mut{color:var(--mut);font-size:15px}
+select,input,textarea{width:100%;background:var(--card);border:2px solid var(--line);border-radius:12px;padding:10px;margin-bottom:10px}
+textarea{min-height:160px;font:14px/1.4 ui-monospace,monospace}
+.bar{height:12px;background:var(--acc2);border-radius:6px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;background:var(--ok)}
+.hl{background:var(--sun);color:#16213e;border-radius:8px;padding:2px 8px;font-weight:800}
+</style></head><body><div id="app"></div>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const uid=()=>Math.random().toString(36).slice(2,9);
+let S={kids:[],cur:null};
+try{const r=localStorage.getItem('koe1');if(r)S=JSON.parse(r)}catch(e){}
+const save=()=>{try{localStorage.setItem('koe1',JSON.stringify(S))}catch(e){}};
+let U={tab:'h',topic:'all',item:null,last:null,shown:false,picked:null,msg:'',del:null};
+const kid=()=>S.kids.find(k=>k.id===S.cur)||null;
+
+function pick(k){
+  const pool=k.topics.filter(t=>U.topic==='all'||t.id===U.topic).flatMap(t=>t.items);
+  const p=pool.length>1?pool.filter(i=>i!==U.last):pool;
+  const w=p.map(i=>4-(i.box||0));let r=Math.random()*w.reduce((a,b)=>a+b,0);
+  for(let n=0;n<p.length;n++){r-=w[n];if(r<=0)return p[n]}
+  return p[0]||null;
+}
+function vKids(){
+  return '<div class="card"><h2>Lisää lapsi</h2><input id="nm" placeholder="Nimi" maxlength="30"><select id="gr">'+[1,2,3,4,5,6].map(n=>`<option value="${n}" ${n===3?'selected':''}>${n}. luokka</option>`).join('')+'</select><button class="pri" data-a="addkid">Lisää lapsi</button></div>'
+  +S.kids.map(x=>`<div class="card"><h2>${esc(x.name)}</h2><div class="mut">${x.grade}. luokka, ${x.topics.length} aihetta</div><div class="row" style="margin:10px 0 0"><button data-a="kid" data-id="${x.id}">Valitse</button><button data-a="delkid" data-id="${x.id}">${U.del===x.id?'Varmista poisto':'Poista'}</button></div></div>`).join('');
+}
+function vImport(k){
+  return `<div class="card"><h2>Tuo tehtäviä lapselle ${esc(k.name)}</h2><p class="mut">Kuvaa kirjan sivut Claudelle chatissa ja pyydä tehtävät JSON-muodossa. Liitä vastaus tähän.</p><textarea id="js" placeholder='{"aihe":"...","tehtavat":[...]}'></textarea><button class="pri" data-a="imp">Tuo tehtävät</button><p>${esc(U.msg)}</p></div>`;
+}
+function vStats(k){
+  if(!k.topics.length)return '<div class="card">Ei vielä aiheita. Tuo tehtäviä ensin.</div>';
+  return k.topics.map(t=>{const n=t.items.length,m=t.items.filter(i=>(i.box||0)>=2).length,p=n?Math.round(m/n*100):0;
+    return `<div class="card"><h2>${esc(t.name)}</h2><div class="mut">${n} tehtävää, hallussa ${m} (${p} %)</div><div class="bar"><i style="width:${p}%"></i></div><button data-a="deltopic" data-id="${t.id}">${U.del===t.id?'Varmista poisto':'Poista aihe'}</button></div>`}).join('');
+}
+function vPractice(k){
+  if(!k.topics.length)return '<div class="card">Ei vielä tehtäviä. Tuo niitä välilehdellä Tuo tehtäviä.</div>';
+  const sel=`<select id="tp"><option value="all">Kaikki aiheet</option>${k.topics.map(t=>`<option value="${t.id}" ${U.topic===t.id?'selected':''}>${esc(t.name)}</option>`).join('')}</select>`;
+  if(!U.item)U.item=pick(k);
+  const it=U.item;if(!it)return sel+'<div class="card">Tässä aiheessa ei ole tehtäviä.</div>';
+  let b=`<div class="card"><p class="q">${esc(it.k)}</p>`;
+  if(it.opts){
+    b+=it.opts.map((o,i)=>{let c='';if(U.picked!==null){if(i===it.c)c='ok';else if(i===U.picked)c='no'}
+      return `<button class="big ${c}" data-a="opt" data-id="${i}" ${U.picked!==null?'disabled':''}>${esc(o)}</button>`}).join('');
+    if(U.picked!==null)b+=(it.e?`<p class="mut">${esc(it.e)}</p>`:'')+'<button class="pri" data-a="next">Seuraava</button>';
+  }else if(!U.shown){b+='<button class="pri" data-a="show">Näytä vastaus</button>'}
+  else{b+=`<p><span class="hl">${esc(it.v)}</span></p><div class="row"><button class="ok" data-a="grade" data-id="1">Osasin</button><button class="no" data-a="grade" data-id="0">En osannut</button></div>`}
+  return sel+b+'</div>';
+}
+function render(){
+  const k=kid();
+  let h='<h1>Koeharjoittelu</h1><div class="row">'+S.kids.map(x=>`<button class="${x.id===S.cur?'on':''}" data-a="kid" data-id="${x.id}">${esc(x.name)}, ${x.grade}. lk</button>`).join('')+'</div>';
+  h+='<nav>'+[['h','Harjoittele'],['t','Tuo'],['s','Tilanne'],['l','Lapset']].map(([t,n])=>`<button class="${U.tab===t?'on':''}" data-a="tab" data-id="${t}">${n}</button>`).join('')+'</nav>';
+  h+=U.tab==='l'?vKids():!k?'<div class="card">Lisää ensin lapsi Lapset-välilehdellä.</div>':U.tab==='h'?vPractice(k):U.tab==='t'?vImport(k):vStats(k);
+  $('#app').innerHTML=h;
+}
+function score(ok){const it=U.item;it.box=ok?Math.min(3,(it.box||0)+1):0;save()}
+function next(){U.last=U.item;U.item=null;U.shown=false;U.picked=null;render()}
+function doImport(k){
+  try{
+    const t=$('#js').value.trim().replace(/^```(?:json)?/,'').replace(/```$/,'').trim();
+    const d=JSON.parse(t),list=Array.isArray(d.tehtavat)?d.tehtavat:[];
+    const items=list.filter(x=>x&&x.k&&(x.v||Array.isArray(x.vaihtoehdot))).map(x=>Array.isArray(x.vaihtoehdot)?{k:x.k,opts:x.vaihtoehdot,c:+x.oikea||0,e:x.selitys||'',box:0}:{k:x.k,v:x.v,box:0});
+    if(!items.length)throw 0;
+    let tp=k.topics.find(t=>t.name===d.aihe);
+    if(!tp){tp={id:uid(),name:d.aihe||'Nimetön aihe',items:[]};k.topics.push(tp)}
+    tp.items.push(...items);save();U.msg='Tuotu '+items.length+' tehtävää aiheeseen '+tp.name+'.';
+  }catch(e){U.msg='En ymmärtänyt tekstiä. Liitä koko JSON sellaisenaan.'}
+  render();
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-a]');if(!b)return;
+  const a=b.dataset.a,id=b.dataset.id,k=kid();
+  if(a==='tab'){U.tab=id;U.del=null;U.msg=''}
+  else if(a==='kid'){S.cur=id;U.item=null;U.topic='all';U.tab='h';save()}
+  else if(a==='addkid'){const n=$('#nm').value.trim();if(!n)return;const x={id:uid(),name:n,grade:+$('#gr').value,topics:[]};S.kids.push(x);S.cur=x.id;save();U.tab='t'}
+  else if(a==='delkid'){if(U.del===id){S.kids=S.kids.filter(x=>x.id!==id);if(S.cur===id)S.cur=S.kids[0]?.id||null;U.del=null;U.item=null;save()}else U.del=id}
+  else if(a==='imp'){return doImport(k)}
+  else if(a==='deltopic'){if(U.del===id){k.topics=k.topics.filter(t=>t.id!==id);U.del=null;U.item=null;U.topic='all';save()}else U.del=id}
+  else if(a==='show'){U.shown=true}
+  else if(a==='grade'){score(id==='1');return next()}
+  else if(a==='opt'){U.picked=+id;score(+id===U.item.c)}
+  else if(a==='next'){return next()}
+  render();
+});
+document.addEventListener('change',e=>{if(e.target.id==='tp'){U.topic=e.target.value;U.item=null;U.shown=false;U.picked=null;render()}});
+render();
+</script></body></html>
